@@ -1,11 +1,11 @@
-import Vector from './Vector';
-import HE3DObject from './H3DObject';
-import Camera from "./camera";
-
+import Vector from './Vector.js';
+import HE3DObject from './H3DObject.js';
+import Camera from "./camera.js";
+import project from './LinearOperations.js';
 
 let camVect = new Vector([0,0,1]);
 let camPos = new Vector([0,0,0]);
-let cam = new Camera(0,0,0,new Vector([0,0,-1]))
+var cam = new Camera(0,0,0,new Vector([0,0,-1]))
 var alpha = Math.PI/100  ; 
 
 
@@ -40,7 +40,7 @@ let face = [0,0,0,
 			];
 		let carre = [0,0,0,200,0,0,200,200,0,0,200,0,0,0,0]
 
-let Obj = new HE3DObject(face,document.getElementById("svg"));
+let Obj = new HE3DObject(face,document.getElementById("svg"),cam);
 let angle = Math.PI/50;
 
 Obj.render();
@@ -65,15 +65,15 @@ window.addEventListener("keydown",(event)=>{
 		cam.y+=s;
 	if(event.keyCode == 40) 
 		cam.y-=s;
-	console.log(`camera position : ${cam.x},${cam.y},${cam.z}`)
+
 	Obj.destroy();
 	Obj.render();
 });
 
 window.addEventListener("mousemove",(event)=>{
 	Obj.destroy();
-	let diffX = event.movementX/10;
-	let diffY = event.movementY/10;
+	let diffX = -event.movementX/210;
+	let diffY = -event.movementY/210;
  	cam.axis.points[0]+=diffX;
 	cam.axis.points[1]+=diffY;
 	console.log(`${diffX} : ${diffY}`)
