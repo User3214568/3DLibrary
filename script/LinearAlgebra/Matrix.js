@@ -1,3 +1,4 @@
+
 /*
 	Conventions  : 1- Tous les vecteurs sont représenter par des tableau unidimensionnel 
 				   2- la matice afficher est la transpose de la matrice réel.
@@ -56,5 +57,6 @@ class Matrix{
 	}
 }
 
+export default Matrix;
 
 

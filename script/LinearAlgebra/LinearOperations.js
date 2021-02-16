@@ -1,5 +1,5 @@
-import Vector from './Vector';
-import Matrix from './Matrix';
+import Vector from './Vector.js';
+import Matrix from './Matrix.js';
 
 
 function arrayAddSus(a1,a2,signe){
@@ -17,7 +17,7 @@ function addVector(v1,v2){
 function susVector(v1,v2){
 	return new Vector(arrayAddSus(v1.points,v2.points,-1));
 }
-function prodvector(v1,v2){
+export  function prodvector(v1,v2){
 
 	let somme = undefined ; 
 	if(v1.getLength() == v2.getLength()){
@@ -31,7 +31,7 @@ function prodvector(v1,v2){
 }
 //************************************************MATRIX OPERATIONS****************************************************************
 
-function ProductMatrix(m1,m2){
+export  function ProductMatrix(m1,m2){
 	let output = [];
 	if(m1.size.Columns == m2.size.Lines){
 		for(let  i = 0 ; i  < m1.size.Lines ; i++) {
@@ -67,7 +67,7 @@ function prepare3DRotationMatrix(u,angleRadians){
 		return new Matrix([v1,v2,v3]);
 	}
 }
-function project(TargetPoint,CameraVect,CameraPoint){
+export default function project(TargetPoint,CameraVect,CameraPoint){
 		
 	
     var diffVect = susVector(TargetPoint,CameraPoint);
@@ -79,4 +79,4 @@ function project(TargetPoint,CameraVect,CameraPoint){
     let u =  addVector(new Vector(M.matrix[0]),TargetPoint);
     return u  ;
 }
-export * from './LinearOperations' ;
+

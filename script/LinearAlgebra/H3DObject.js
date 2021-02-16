@@ -1,13 +1,14 @@
-import Vector from './Vector';
-import HE3DObject from './H3DObject';
-import setUpPolyline from './Dom3D';
-import {ProductMatrix,prodvector,project} from './LinearOperations';
+import Vector from './Vector.js';
+import setUpPolyline from './Dom3D.js';
+import ProductMatrix from './LinearOperations.js';
+import project from './LinearOperations.js';
 class HE3DObject{
-	constructor(points , renderTragetSVG){
+	constructor(points , renderTragetSVG , cam){
 		this.points =  points ; 
 		this.length = points.length;
 		this.svg = renderTragetSVG;
 		this.pID = this.svg.id+":poly";
+		this.cam = cam;
 		this.x = 0 ; 
 		this.y = 0; 
 		this.z = 0;
@@ -27,13 +28,13 @@ class HE3DObject{
 	}
 	
 	setTranslate(x,y,z){
-		Obj.destroy();
+		this.destroy();
 		for(let  i = 0 ; i < (this.points.length-2) ; i+=3){
 			this.points[i] = this.points[i]+x;
 			this.points[i+1] = this.points[i+1]+y;
 			this.points[i+2] = this.points[i+2]+z;
 		}
-		Obj.render();
+		this.render();
 	}
 	setRotate(axisVector,angleRads){
 		this.destroy();
@@ -64,8 +65,8 @@ class HE3DObject{
 	}
 	render(){
 		
-		if(true || prodvector(new Vector([this.x-cam.x,this.y-cam.y,this.z-cam.z]),cam.axis)>=0){
-            let ian = this.ProjectObject3D(cam.axis,new Vector([cam.x,cam.y,cam.z]));
+		if(true || prodvector(new Vector([this.x-this.cam.x,this.y-this.cam.y,this.z-this.cam.z]),this.cam.axis)>=0){
+            let ian = this.ProjectObject3D(this.cam.axis,new Vector([this.cam.x,this.cam.y,this.cam.z]));
             setUpPolyline(this.svg,ian,this.pID);
 		}
 		else{
